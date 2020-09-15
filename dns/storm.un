@@ -1,0 +1,9 @@
+$TTL      3h
+@         SOA     ns root.ns  1 1d 12h 1w 3h
+          NS      ns
+
+ns        A       192.168.13.1
+ns        A       192.168.13.2
+node1     A       192.168.13.1
+node2     A       192.168.13.2
+gate      A       192.168.13.254
