@@ -6,4 +6,4 @@ FailSafe UBUNTU 20.04
 3) Устанавливаем bind9, в /etc/bind/ копируем конфиги из папки dns и перезапускаем службу;
 4) Устанавливаем isc-dhcp-server, меняем в /etc/default/isc-dhcp-server INTERFACESv4="ens33", и в папку /etc/dhcp/ помещаем файлы из папки dhcp, перезапускаем service isc-dhcp-server restart;
 5) Устанавливаем ucarp и fake(apt install ucarp fake) берем скрипты из ucarp и помещаем в /etc/. Так же меняем конфиг в /etc/rc.local на обоих серверах(Проверяем наличие флага х у файла) и перезагружаемся
-
+6) Скачиваем скрипты из папки isp selection scripts в папку /root/ и прописываем в crontab * * * * * /root/select_isp.sh >/dev/null 2>&1
