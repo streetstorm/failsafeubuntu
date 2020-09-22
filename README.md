@@ -20,19 +20,30 @@ FailSafe UBUNTU 20.04
 
 9) Устанавливаем pacemaker, проверям состояние с помощью `crm_mon -1`, оба сервера должны быть online;
 
-10) Устанавливаем пакет управления конфигурацией pacemaker `apt install crmsh`. Выполняем следующие команды:
+10) Устанавливаем пакет управления конфигурацией pacemaker `apt install crmsh`. Выполняем следующие команды(В зависимости от нужной утилиты):
     ```sh
     crm status - статус
     crm configure show - просмотр конфигурации
     crm configure - начать конфигурирование:
+        st-ssh
             property no-quorum-policy=ignore
             primitive st-ssh stonith:external/ssh params hostlist="node1.storm.un node2.storm.un"
             clone fencing st-ssh
+        ftp
+            primitive pr_ftp lsb:proftpd
+            primitive pr_ip ocf:heartbeat:IPaddr2 params ip=192.168.X.10 cidr_netmask=32 nic=eth0
+            group gr_ftp_ip pr_ftp pr_ip
+        ISCSI
+            primitive pr_srv_istgt lsb:istgt
+            primitive pr_ip_istgt ocf:heartbeat:IPaddr2 params ip=192.168.X.15 cidr_netmask=32 nic=eth0
+            group gr_ip_fs pr_fs_r0 pr_ip_istgt pr_srv_istgt
 
             show
             commit
             exit
     ```
+11) Перед конфигурировнаием pacemaker для iscsi установим пакет `apt install istgt` и сконфигурируем файл /etc/istgt.conf который исходно лежит по пути /usr/share/doc/istgt/examples/istgt.conf.gz и изменим конфигурацию на основе файла в репозитории
+
 
 
 
