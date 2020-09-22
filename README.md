@@ -1,7 +1,7 @@
 FailSafe UBUNTU 20.04
 
 Всё делаем на обоих серверах:
-1) Настраиваем netlan, hosts, sysctl, hostname(nodeN.storm.un); # все настройки лежат в папке network
+1) Настраиваем netlan, hosts, sysctl, hostname(nodeN.storm.un); # все настройки лежат в папке network;
 
 2) Настраиваем resolv.conf, для этого apt install resolvconf, vim /etc/resolvconf/resolv.conf.d/head в этот файл вписываем нужные параметры и перезапускаемся;
 
@@ -20,7 +20,7 @@ FailSafe UBUNTU 20.04
 
 9) Устанавливаем pacemaker, проверям состояние с помощью `crm_mon -1`, оба сервера должны быть online;
 
-10) Устанавливаем пакет управления конфигурацией pfcemaker `apt install crmsh`. Выполняем следующие команды:
+10) Устанавливаем пакет управления конфигурацией pacemaker `apt install crmsh`. Выполняем следующие команды:
     ```sh
     crm status - статус
     crm configure show - просмотр конфигурации
